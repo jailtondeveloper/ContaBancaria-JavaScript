@@ -1,0 +1,95 @@
+//01 Classe conta e seus atributos com parametros
+
+class ContaBancaria{
+    constructor(agencia, numero, tipo){
+        this.agencia = agencia;
+        this.numero = numero;
+        this.tipo = tipo;
+        this.saldo = 0;
+    }
+
+    //ainda dentro da classe principal
+
+    //02 criando os métodos getters e setters
+
+    get saldo(){
+        return this._saldo;
+    }
+    set saldo(valor){
+        this._saldo = valor;
+    }
+    //03 criando as funções de sacar e depositar
+    //função sacar
+
+    sacar(valor) {
+        if (valor > this._saldo) { //verifica se há saldo
+            return "saldo insuficiente";
+        }
+        this._saldo = this._saldo - valor;
+
+        return this._saldo; //retorna saldo atual
+    }
+
+    //função depositar
+
+    depositar(valor){
+        this._saldo = this._saldo + valor;
+
+        return this._saldo;//retorna quanto existe após o deposito
+    }
+} //Fechando a classe principal
+
+    //04 classe filha Conta corrente , herdando  Conta Bancária
+
+    class ContaCorrente extends ContaBancaria{
+        constructor(agencia, numero, cartaoCredito){
+            super(agencia, numero);//super aponta a classe pai
+            this.tipo = 'corrente';
+            this.cartaoCredito = cartaoCredito;
+        }
+
+        //05 criando os getters e setters para essa classe
+
+        get cartaoCredito(){
+            return this._cartaoCredito;
+        }
+        set cartaoCredito(valor){
+            this._cartaoCredito = valor;
+        }
+    }
+
+    //07 Classe filha conta poupança herdando conta Bancária
+
+    class ContaPoupanca extends ContaBancaria{
+        constructor(agencia, numero){ 
+        super(agencia, numero);
+        this.tipo = 'poupança'
+        }
+    }
+
+    //08 Classe filha conta universitaria
+
+    class ContaUniversitaria extends ContaBancaria {
+        constructor(agencia, numero){
+        super(agencia, numero);
+        this.tipo = 'universitaria';
+    }
+
+
+    //09 Sobrescrevendo a função sacar 
+
+    sacar(valor) {
+        if (valor > 500){
+            return 'Nessa conta você só pode sacar R$500,00'
+        }
+        this._saldo = this._saldo - valor;
+    }
+}
+    
+
+    
+
+
+
+
+
